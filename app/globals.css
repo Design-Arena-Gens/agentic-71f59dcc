@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens: only semantic variables, primary defined from #FF5A5F */
+:root {
+  /* Primary (#FF5A5F) expressed in HSL for flexibility */
+  --primary-h: 358;
+  --primary-s: 100%;
+  --primary-l: 67%;
+  --primary: var(--primary-h) var(--primary-s) var(--primary-l);
+
+  /* Derived palette (HSL values, no other hex) */
+  --background: 0 0% 100%; /* white background */
+  --surface: 0 0% 98%; /* soft card surface */
+  --neutral: 220 9% 20%; /* primary text */
+  --secondary: var(--primary-h) 70% 55%; /* complementary to primary */
+  --accent: var(--primary); /* accent equals primary */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 220 10% 8%;
+    --surface: 220 10% 12%;
+    --neutral: 220 15% 92%;
+    --secondary: var(--primary-h) 70% 60%;
+    --accent: var(--primary);
+  }
+}
+
+/* Typography and base resets */
+@layer base {
+  *, ::before, ::after {
+    @apply antialiased;
+  }
+  html, body {
+    @apply h-full bg-background text-neutral;
+  }
+}
+
+/* Utility helpers */
+@layer utilities {
+  .safe-x { @apply px-4 sm:px-6; }
+  .safe-y { @apply py-3; }
+  .touch-target { min-height: 44px; min-width: 44px; }
+  .card { @apply rounded-2xl bg-surface shadow-soft; }
+  .section-title { @apply text-lg font-semibold; }
+  .muted { color: hsl(var(--neutral) / 0.7); }
+}
